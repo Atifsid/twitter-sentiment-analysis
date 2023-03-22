@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.project.twittersentimentanalysis.entities.Tweet;
 
 @Repository
-public interface TweetDao extends JpaRepository<Tweet, Long>{
+public interface TweetDao extends JpaRepository<Tweet, Long> {
 
 }

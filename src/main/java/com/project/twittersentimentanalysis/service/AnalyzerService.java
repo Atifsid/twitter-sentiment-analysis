@@ -5,5 +5,5 @@ import java.util.List;
 import com.project.twittersentimentanalysis.entities.Sentiment;
 
 public interface AnalyzerService {
-	public List<Sentiment> analyze(); 
+	public List<Sentiment> analyze();
 }

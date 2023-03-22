@@ -21,36 +21,35 @@ import edu.stanford.nlp.util.CoreMap;
 
 @Service
 public class AnalyzerServiceImpl implements AnalyzerService {
-    static StanfordCoreNLP pipeline;
+	static StanfordCoreNLP pipeline;
 
-    @Autowired
-    private SentimentDao sentimentDao;
-    @Autowired
-    private TweetDao tweetDao;
+	@Autowired
+	private SentimentDao sentimentDao;
+	@Autowired
+	private TweetDao tweetDao;
 
-    public static void init() {
-        Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
-        pipeline = new StanfordCoreNLP(props);
-    }
+	public static void init() {
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
+		pipeline = new StanfordCoreNLP(props);
+	}
 
-    public static String findSentiment(String tweet) {
-        String sentimentType = "NULL";
-        if (tweet != null && tweet.length() > 0) {
-            Annotation annotation = pipeline.process(tweet);
-            for (CoreMap sentence : annotation
-                    .get(CoreAnnotations.SentencesAnnotation.class)) {
-                sentimentType = sentence.get(SentimentCoreAnnotations.SentimentClass.class);
-            }
-        }
-        return sentimentType;
-    }
+	public static String findSentiment(String tweet) {
+		String sentimentType = "NULL";
+		if (tweet != null && tweet.length() > 0) {
+			Annotation annotation = pipeline.process(tweet);
+			for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
+				sentimentType = sentence.get(SentimentCoreAnnotations.SentimentClass.class);
+			}
+		}
+		return sentimentType;
+	}
 
-    int num_neutral = 0;
-    int num_negative = 0;
-    int num_realnegative = 0;
-    int num_positive = 0;
-    int num_realpositive = 0;
+	int num_neutral = 0;
+	int num_negative = 0;
+	int num_realnegative = 0;
+	int num_positive = 0;
+	int num_realpositive = 0;
 
 	@Override
 	public List<Sentiment> analyze() {
@@ -59,25 +58,21 @@ public class AnalyzerServiceImpl implements AnalyzerService {
 
 		List<Tweet> tweets = tweetDao.findAll();
 
-		for(int i = 0; i < tweets.size(); i++) {
+		for (int i = 0; i < tweets.size(); i++) {
 			String tweetText = tweets.get(i).getTweetText();
 			String sentiment = findSentiment(tweetText);
 
-			if(sentiment.equalsIgnoreCase("Neutral")){
-	            num_neutral++;
-	        }
-	        else if(sentiment.equalsIgnoreCase("Negative")){
-	            num_negative++;
-	        }
-	        else if(sentiment.equalsIgnoreCase("Very Negative")){
-	            num_realnegative++;
-	        }
-	        else if(sentiment.equalsIgnoreCase("Very Positive")){
-	            num_realpositive++;
-	        }
-	        else{
-	            num_positive++;
-	        }
+			if (sentiment.equalsIgnoreCase("Neutral")) {
+				num_neutral++;
+			} else if (sentiment.equalsIgnoreCase("Negative")) {
+				num_negative++;
+			} else if (sentiment.equalsIgnoreCase("Very Negative")) {
+				num_realnegative++;
+			} else if (sentiment.equalsIgnoreCase("Very Positive")) {
+				num_realpositive++;
+			} else {
+				num_positive++;
+			}
 		}
 
 		Sentiment s = new Sentiment();
@@ -91,9 +86,9 @@ public class AnalyzerServiceImpl implements AnalyzerService {
 
 		num_neutral = 0;
 		num_negative = 0;
-	    num_realnegative = 0;
-	    num_positive = 0;
-	    num_realpositive = 0;
+		num_realnegative = 0;
+		num_positive = 0;
+		num_realpositive = 0;
 		list.add(s);
 		return list;
 	}
