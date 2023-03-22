@@ -3,6 +3,8 @@ package com.project.twittersentimentanalysis.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.project.twittersentimentanalysis.entities.Tweet;
 import com.project.twittersentimentanalysis.service.FetchTweet;
 
@@ -14,6 +16,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+@Service
 public class FetchTweetImpl implements FetchTweet{
 
 	@Override
@@ -21,16 +24,15 @@ public class FetchTweetImpl implements FetchTweet{
 		List<Tweet> list = new ArrayList<>();
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true)
-		.setOAuthConsumerKey("")
-		.setOAuthConsumerSecret("")
-		.setOAuthAccessToken("")
-		.setOAuthAccessTokenSecret("");
+		cb.setOAuthConsumerKey("")
+		  .setOAuthConsumerSecret("")
+		  .setOAuthAccessToken("")
+		  .setOAuthAccessTokenSecret("");
 		
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		
 		try {
-			Twitter twitter = tf.getSingleton();
+			Twitter twitter = tf.getInstance();
 			
 			Query q = new Query(query + " +exclude:retweets");
 			q.setResultType(q.RECENT);
