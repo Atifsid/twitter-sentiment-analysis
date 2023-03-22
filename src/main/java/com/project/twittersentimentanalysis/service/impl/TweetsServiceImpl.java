@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.twittersentimentanalysis.dao.TweetDao;
 import com.project.twittersentimentanalysis.entities.Tweet;
-import com.project.twittersentimentanalysis.service.FetchTweet;
+import com.project.twittersentimentanalysis.service.FetchTweetService;
 import com.project.twittersentimentanalysis.service.TweetService;
 
 @Service
@@ -16,7 +16,7 @@ public class TweetsServiceImpl implements TweetService {
 	@Autowired
 	private TweetDao tweetsDao;
 	@Autowired
-	private FetchTweet fetchTweet;
+	private FetchTweetService fetchTweet;
 
 	public TweetsServiceImpl() {
 

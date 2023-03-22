@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.project.twittersentimentanalysis.entities.Tweet;
 
-public interface FetchTweet {
+public interface FetchTweetService {
 	public List<Tweet> fetchTweets(String query);
 }
