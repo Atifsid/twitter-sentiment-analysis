@@ -24,7 +24,10 @@ public class FetchTweetServiceImpl implements FetchTweetService {
 		List<Tweet> list = new ArrayList<>();
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setOAuthConsumerKey("").setOAuthConsumerSecret("").setOAuthAccessToken("").setOAuthAccessTokenSecret("");
+		cb.setOAuthConsumerKey("")
+		  .setOAuthConsumerSecret("")
+		  .setOAuthAccessToken("")
+		  .setOAuthAccessTokenSecret("");
 
 		TwitterFactory tf = new TwitterFactory(cb.build());
 
