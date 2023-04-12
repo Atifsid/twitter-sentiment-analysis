@@ -110,4 +110,23 @@ public class AnalyzerServiceImpl implements AnalyzerService {
 		
 		return response;
 	}
+
+	@Override
+	public ResponseDto<List<Sentiment>> sentiment() {
+		ResponseDto<List<Sentiment>> response = new ResponseDto<List<Sentiment>>();
+		try {
+			List<Sentiment> list = new ArrayList<>();
+			list.addAll(sentimentDao.findAll());
+			
+			response.setCode(HttpServletResponse.SC_OK);
+			response.setStatus(HttpStatus.OK);
+			response.setMessage("Sentiment Fetched Successfully");
+			response.setData(list);
+		} catch (Exception e) {
+			response.setCode(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+			response.setMessage(e.getMessage());
+		}
+		return response;
+	}
 }

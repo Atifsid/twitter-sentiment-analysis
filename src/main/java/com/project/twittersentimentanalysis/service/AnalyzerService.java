@@ -7,4 +7,7 @@ import com.project.twittersentimentanalysis.entities.Sentiment;
 
 public interface AnalyzerService {
 	public ResponseDto<List<Sentiment>> analyze();
+
+	public ResponseDto<List<Sentiment>> sentiment();
+	
 }

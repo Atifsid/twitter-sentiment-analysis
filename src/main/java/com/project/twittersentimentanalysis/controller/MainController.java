@@ -30,4 +30,8 @@ public class MainController {
 	public ResponseDto<List<Sentiment>> getAnalysis() {
 		return this.analyzerService.analyze();
 	}
+	@GetMapping("/sentiment")
+	public ResponseDto<List<Sentiment>> getsentiment() {
+		return this.analyzerService.sentiment();
+	}
 }
