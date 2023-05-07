@@ -26,9 +26,11 @@ public class FetchTweetServiceImpl implements FetchTweetService {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		// add creds
 		cb.setOAuthConsumerKey("")
-		  .setOAuthConsumerSecret("")
+		  .setOAuthConsumerSecret("x")
 		  .setOAuthAccessToken("")
 		  .setOAuthAccessTokenSecret("");
+
+
 
 		TwitterFactory tf = new TwitterFactory(cb.build());
 
@@ -38,30 +40,35 @@ public class FetchTweetServiceImpl implements FetchTweetService {
 			Query q = new Query(query + " +exclude:retweets");
 			q.setResultType(q.RECENT);
 			q.setCount(100);
+			q.setLang("en");
 
-			for (int i = 1; i <= 15; i++) {
+//			for (int i = 1; i <= 1; i++) {
+			int i = 0;
 				QueryResult result = twitter.search(q);
 				for (Status tweet : result.getTweets()) {
+					i++;
 					Tweet t = new Tweet();
 					t.setUserName(tweet.getUser().getScreenName());
 					t.setTweetText(tweet.getText());
 					t.setCreatedAt(tweet.getCreatedAt());
 					list.add(t);
+					if(i == 100) break;
 				}
-				if (!result.hasNext()) {
-					break;
-				}
-				Thread.sleep(3000);
-				q = result.nextQuery();
-			}
+//				if (!result.hasNext()) {
+//					break;
+//				}
+//				Thread.sleep(3000);
+//				q = result.nextQuery();
+//			}
 
 		} catch (TwitterException te) {
 			te.printStackTrace();
 			System.out.println("Failed to get the query: " + te.getMessage());
 			System.exit(-1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
+//		catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		return list;
 	}
 

@@ -129,4 +129,12 @@ public class AnalyzerServiceImpl implements AnalyzerService {
 		}
 		return response;
 	}
+
+	@Override
+	public ResponseDto<List<String>> getDataForWordCloud() {
+		ResponseDto<List<String>> responseDto = new ResponseDto<>();
+		
+		
+		return responseDto;
+	}
 }

@@ -9,5 +9,7 @@ public interface AnalyzerService {
 	public ResponseDto<List<Sentiment>> analyze();
 
 	public ResponseDto<List<Sentiment>> sentiment();
+
+	public ResponseDto<List<String>> getDataForWordCloud();
 	
 }
