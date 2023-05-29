@@ -25,10 +25,7 @@ public class FetchTweetServiceImpl implements FetchTweetService {
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		// add creds
-		cb.setOAuthConsumerKey("")
-		  .setOAuthConsumerSecret("x")
-		  .setOAuthAccessToken("")
-		  .setOAuthAccessTokenSecret("");
+		cb.
 
 
 
